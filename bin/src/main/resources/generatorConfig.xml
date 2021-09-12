@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+  <!--导入属性配置-->
+  <properties resource="jdbc.properties"></properties>
+  
+  <context id="MySQLTables" targetRuntime="MyBatis3">
+     <!--避免生成过多注释-->
+    <commentGenerator>
+        <property name="suppressDate" value="true"/>
+        <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <!--JDBC数据库信息-->
+    <jdbcConnection driverClass="${jdbc.driver}"
+        connectionURL="${jdbc.url}"
+        userId="${jdbc.username}"
+        password="${jdbc.password}">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+     <!--自动生成的实体的存放包路径 -->
+    <javaModelGenerator targetPackage="cn.edu.uibe.domain" targetProject="myapp/src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    
+    <!--自动生成的*Mapper.xml文件存放路径 -->
+    <sqlMapGenerator targetPackage="cn.edu.uibe.dao"  targetProject="myapp/src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <!--自动生成的*Mapper.java存放路径 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.uibe.dao"  targetProject="myapp/src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+
+    <table schema="mydb" tableName="collect2" domainObjectName="Collect2" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <table schema="mydb" tableName="forbid" domainObjectName="Forbid" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <!--
+    <table schema="mydb" tableName="infoCollect" domainObjectName="InfoCollect" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <table schema="mydb" tableName="submit" domainObjectName="Submit" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <table schema="mydb" tableName="project" domainObjectName="Project" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <table schema="mydb" tableName="taskplan" domainObjectName="Taskplan" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>
+    <table schema="mydb" tableName="taskreal" domainObjectName="Taskreal" enableCountByExample="false" enableUpdateByExample="false"
+     enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+    </table>    
+    -->
+  </context>
+</generatorConfiguration>

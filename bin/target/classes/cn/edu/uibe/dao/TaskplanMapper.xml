@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.uibe.dao.TaskplanMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.uibe.domain.Taskplan">
+    <id column="planId" jdbcType="BIGINT" property="planid" />
+    <result column="projectId" jdbcType="BIGINT" property="projectid" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="taskName" jdbcType="VARCHAR" property="taskname" />
+    <result column="taskNumber" jdbcType="INTEGER" property="tasknumber" />
+    <result column="startedTime" jdbcType="INTEGER" property="startedtime" />
+    <result column="period" jdbcType="INTEGER" property="period" />
+    <result column="quota" jdbcType="REAL" property="quota" />
+    <result column="cost" jdbcType="REAL" property="cost" />
+    <result column="submitter" jdbcType="VARCHAR" property="submitter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    planId, projectId, details, taskName, taskNumber, startedTime, period, quota, cost, 
+    submitter
+  </sql>
+  <!-- 	List<Taskplan> selectByProjectId(long projectid); -->
+  	    <select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from taskplan
+	    where projectId = #{projectid,jdbcType=BIGINT}
+	  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from taskplan
+    where planId = #{planid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from taskplan
+    where planId = #{planid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.uibe.domain.Taskplan">
+    insert into taskplan (planId, projectId, details, 
+      taskName, taskNumber, startedTime, 
+      period, quota, cost, submitter
+      )
+    values (#{planid,jdbcType=BIGINT}, #{projectid,jdbcType=BIGINT}, #{details,jdbcType=VARCHAR}, 
+      #{taskname,jdbcType=VARCHAR}, #{tasknumber,jdbcType=INTEGER}, #{startedtime,jdbcType=INTEGER}, 
+      #{period,jdbcType=INTEGER}, #{quota,jdbcType=REAL}, #{cost,jdbcType=REAL}, #{submitter,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.uibe.domain.Taskplan">
+    insert into taskplan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="planid != null">
+        planId,
+      </if>
+      <if test="projectid != null">
+        projectId,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="taskname != null">
+        taskName,
+      </if>
+      <if test="tasknumber != null">
+        taskNumber,
+      </if>
+      <if test="startedtime != null">
+        startedTime,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="quota != null">
+        quota,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="submitter != null">
+        submitter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="planid != null">
+        #{planid,jdbcType=BIGINT},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="taskname != null">
+        #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="tasknumber != null">
+        #{tasknumber,jdbcType=INTEGER},
+      </if>
+      <if test="startedtime != null">
+        #{startedtime,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="quota != null">
+        #{quota,jdbcType=REAL},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=REAL},
+      </if>
+      <if test="submitter != null">
+        #{submitter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.uibe.domain.Taskplan">
+    update taskplan
+    <set>
+      <if test="projectid != null">
+        projectId = #{projectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="taskname != null">
+        taskName = #{taskname,jdbcType=VARCHAR},
+      </if>
+      <if test="tasknumber != null">
+        taskNumber = #{tasknumber,jdbcType=INTEGER},
+      </if>
+      <if test="startedtime != null">
+        startedTime = #{startedtime,jdbcType=INTEGER},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="quota != null">
+        quota = #{quota,jdbcType=REAL},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=REAL},
+      </if>
+      <if test="submitter != null">
+        submitter = #{submitter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where planId = #{planid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.uibe.domain.Taskplan">
+    update taskplan
+    set projectId = #{projectid,jdbcType=BIGINT},
+      details = #{details,jdbcType=VARCHAR},
+      taskName = #{taskname,jdbcType=VARCHAR},
+      taskNumber = #{tasknumber,jdbcType=INTEGER},
+      startedTime = #{startedtime,jdbcType=INTEGER},
+      period = #{period,jdbcType=INTEGER},
+      quota = #{quota,jdbcType=REAL},
+      cost = #{cost,jdbcType=REAL},
+      submitter = #{submitter,jdbcType=VARCHAR}
+    where planId = #{planid,jdbcType=BIGINT}
+  </update>
+</mapper>

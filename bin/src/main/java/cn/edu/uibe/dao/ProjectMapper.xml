@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.uibe.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.uibe.domain.Project">
+    <id column="projectId" jdbcType="BIGINT" property="projectid" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectname" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="colLen" jdbcType="INTEGER" property="collen" />
+    <result column="rowLen" jdbcType="INTEGER" property="rowlen" />
+    <result column="colList" jdbcType="VARCHAR" property="collist" />
+    <result column="rowList" jdbcType="VARCHAR" property="rowlist" />
+    <result column="createdTime" jdbcType="TIMESTAMP" property="createdtime" />
+    <result column="ddl" jdbcType="TIMESTAMP" property="ddl" />
+    <result column="manager" jdbcType="VARCHAR" property="manager" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    projectId, projectName, details, colLen, rowLen, colList, rowList, createdTime, ddl, 
+    manager
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where projectId = #{projectid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from project
+    where projectId = #{projectid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.uibe.domain.Project">
+    insert into project (projectId, projectName, details, 
+      colLen, rowLen, colList, 
+      rowList, createdTime, ddl, 
+      manager)
+    values (#{projectid,jdbcType=BIGINT}, #{projectname,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{collen,jdbcType=INTEGER}, #{rowlen,jdbcType=INTEGER}, #{collist,jdbcType=VARCHAR}, 
+      #{rowlist,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{ddl,jdbcType=TIMESTAMP}, 
+      #{manager,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.uibe.domain.Project">
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectid != null">
+        projectId,
+      </if>
+      <if test="projectname != null">
+        projectName,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="collen != null">
+        colLen,
+      </if>
+      <if test="rowlen != null">
+        rowLen,
+      </if>
+      <if test="collist != null">
+        colList,
+      </if>
+      <if test="rowlist != null">
+        rowList,
+      </if>
+      <if test="createdtime != null">
+        createdTime,
+      </if>
+      <if test="ddl != null">
+        ddl,
+      </if>
+      <if test="manager != null">
+        manager,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectid != null">
+        #{projectid,jdbcType=BIGINT},
+      </if>
+      <if test="projectname != null">
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="collen != null">
+        #{collen,jdbcType=INTEGER},
+      </if>
+      <if test="rowlen != null">
+        #{rowlen,jdbcType=INTEGER},
+      </if>
+      <if test="collist != null">
+        #{collist,jdbcType=VARCHAR},
+      </if>
+      <if test="rowlist != null">
+        #{rowlist,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null">
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddl != null">
+        #{ddl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.uibe.domain.Project">
+    update project
+    <set>
+      <if test="projectname != null">
+        projectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="collen != null">
+        colLen = #{collen,jdbcType=INTEGER},
+      </if>
+      <if test="rowlen != null">
+        rowLen = #{rowlen,jdbcType=INTEGER},
+      </if>
+      <if test="collist != null">
+        colList = #{collist,jdbcType=VARCHAR},
+      </if>
+      <if test="rowlist != null">
+        rowList = #{rowlist,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null">
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddl != null">
+        ddl = #{ddl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manager != null">
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where projectId = #{projectid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.uibe.domain.Project">
+    update project
+    set projectName = #{projectname,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      colLen = #{collen,jdbcType=INTEGER},
+      rowLen = #{rowlen,jdbcType=INTEGER},
+      colList = #{collist,jdbcType=VARCHAR},
+      rowList = #{rowlist,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      ddl = #{ddl,jdbcType=TIMESTAMP},
+      manager = #{manager,jdbcType=VARCHAR}
+    where projectId = #{projectid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.uibe.dao.CollectMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.uibe.domain.Collect">
+    <id column="collectId" jdbcType="BIGINT" property="collectid" />
+    <result column="collectName" jdbcType="VARCHAR" property="collectname" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="colLen" jdbcType="INTEGER" property="collen" />
+    <result column="rowLen" jdbcType="INTEGER" property="rowlen" />
+    <result column="colList" jdbcType="VARCHAR" property="collist" />
+    <result column="rowLIst" jdbcType="VARCHAR" property="rowlist" />
+    <result column="createdTime" jdbcType="TIMESTAMP" property="createdtime" />
+    <result column="ddl" jdbcType="TIMESTAMP" property="ddl" />
+    <result column="collecter" jdbcType="VARCHAR" property="collecter" />
+    <result column="uniqueFlag" jdbcType="BIT" property="uniqueflag" />
+    <result column="forbidFlag" jdbcType="BIT" property="forbidflag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    collectId, collectName, details, colLen, rowLen, colList, rowLIst, createdTime, ddl, 
+    collecter, uniqueFlag, forbidFlag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from collect
+    where collectId = #{collectid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from collect
+    where collectId = #{collectid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.uibe.domain.Collect">
+    insert into collect (collectId, collectName, details, 
+      colLen, rowLen, colList, 
+      rowLIst, createdTime, ddl, 
+      collecter, uniqueFlag, forbidFlag
+      )
+    values (#{collectid,jdbcType=BIGINT}, #{collectname,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{collen,jdbcType=INTEGER}, #{rowlen,jdbcType=INTEGER}, #{collist,jdbcType=VARCHAR}, 
+      #{rowlist,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{ddl,jdbcType=TIMESTAMP}, 
+      #{collecter,jdbcType=VARCHAR}, #{uniqueflag,jdbcType=BIT}, #{forbidflag,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.uibe.domain.Collect">
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collectid != null">
+        collectId,
+      </if>
+      <if test="collectname != null">
+        collectName,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="collen != null">
+        colLen,
+      </if>
+      <if test="rowlen != null">
+        rowLen,
+      </if>
+      <if test="collist != null">
+        colList,
+      </if>
+      <if test="rowlist != null">
+        rowLIst,
+      </if>
+      <if test="createdtime != null">
+        createdTime,
+      </if>
+      <if test="ddl != null">
+        ddl,
+      </if>
+      <if test="collecter != null">
+        collecter,
+      </if>
+      <if test="uniqueflag != null">
+        uniqueFlag,
+      </if>
+      <if test="forbidflag != null">
+        forbidFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collectid != null">
+        #{collectid,jdbcType=BIGINT},
+      </if>
+      <if test="collectname != null">
+        #{collectname,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="collen != null">
+        #{collen,jdbcType=INTEGER},
+      </if>
+      <if test="rowlen != null">
+        #{rowlen,jdbcType=INTEGER},
+      </if>
+      <if test="collist != null">
+        #{collist,jdbcType=VARCHAR},
+      </if>
+      <if test="rowlist != null">
+        #{rowlist,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null">
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddl != null">
+        #{ddl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collecter != null">
+        #{collecter,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqueflag != null">
+        #{uniqueflag,jdbcType=BIT},
+      </if>
+      <if test="forbidflag != null">
+        #{forbidflag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.uibe.domain.Collect">
+    update collect
+    <set>
+      <if test="collectname != null">
+        collectName = #{collectname,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="collen != null">
+        colLen = #{collen,jdbcType=INTEGER},
+      </if>
+      <if test="rowlen != null">
+        rowLen = #{rowlen,jdbcType=INTEGER},
+      </if>
+      <if test="collist != null">
+        colList = #{collist,jdbcType=VARCHAR},
+      </if>
+      <if test="rowlist != null">
+        rowLIst = #{rowlist,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null">
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddl != null">
+        ddl = #{ddl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collecter != null">
+        collecter = #{collecter,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqueflag != null">
+        uniqueFlag = #{uniqueflag,jdbcType=BIT},
+      </if>
+      <if test="forbidflag != null">
+        forbidFlag = #{forbidflag,jdbcType=BIT},
+      </if>
+    </set>
+    where collectId = #{collectid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.uibe.domain.Collect">
+    update collect
+    set collectName = #{collectname,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      colLen = #{collen,jdbcType=INTEGER},
+      rowLen = #{rowlen,jdbcType=INTEGER},
+      colList = #{collist,jdbcType=VARCHAR},
+      rowLIst = #{rowlist,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      ddl = #{ddl,jdbcType=TIMESTAMP},
+      collecter = #{collecter,jdbcType=VARCHAR},
+      uniqueFlag = #{uniqueflag,jdbcType=BIT},
+      forbidFlag = #{forbidflag,jdbcType=BIT}
+    where collectId = #{collectid,jdbcType=BIGINT}
+  </update>
+</mapper>

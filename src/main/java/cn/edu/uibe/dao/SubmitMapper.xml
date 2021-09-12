@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.uibe.dao.SubmitMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.uibe.domain.Submit">
+    <id column="submitId" jdbcType="BIGINT" property="submitid" />
+    <result column="collectId" jdbcType="BIGINT" property="collectid" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="col" jdbcType="INTEGER" property="col" />
+    <result column="row" jdbcType="INTEGER" property="row" />
+    <result column="finishedTime" jdbcType="TIMESTAMP" property="finishedtime" />
+    <result column="submitter" jdbcType="VARCHAR" property="submitter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    submitId, collectId, details, col, row, finishedTime, submitter
+  </sql>
+  <!-- List<Submit> selectBycollectId(Long collectId); -->
+    <select id="selectBycollectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from submit
+    where collectId = #{collectId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from submit
+    where submitId = #{submitid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from submit
+    where submitId = #{submitid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.uibe.domain.Submit">
+    insert into submit (submitId, collectId, details, 
+      col, row, finishedTime, 
+      submitter)
+    values (#{submitid,jdbcType=BIGINT}, #{collectid,jdbcType=BIGINT}, #{details,jdbcType=VARCHAR}, 
+      #{col,jdbcType=INTEGER}, #{row,jdbcType=INTEGER}, #{finishedtime,jdbcType=TIMESTAMP}, 
+      #{submitter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.uibe.domain.Submit">
+    insert into submit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="submitid != null">
+        submitId,
+      </if>
+      <if test="collectid != null">
+        collectId,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="col != null">
+        col,
+      </if>
+      <if test="row != null">
+        row,
+      </if>
+      <if test="finishedtime != null">
+        finishedTime,
+      </if>
+      <if test="submitter != null">
+        submitter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="submitid != null">
+        #{submitid,jdbcType=BIGINT},
+      </if>
+      <if test="collectid != null">
+        #{collectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="col != null">
+        #{col,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        #{row,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtime != null">
+        #{finishedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitter != null">
+        #{submitter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.uibe.domain.Submit">
+    update submit
+    <set>
+      <if test="collectid != null">
+        collectId = #{collectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="col != null">
+        col = #{col,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        row = #{row,jdbcType=INTEGER},
+      </if>
+      <if test="finishedtime != null">
+        finishedTime = #{finishedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitter != null">
+        submitter = #{submitter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where submitId = #{submitid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.uibe.domain.Submit">
+    update submit
+    set collectId = #{collectid,jdbcType=BIGINT},
+      details = #{details,jdbcType=VARCHAR},
+      col = #{col,jdbcType=INTEGER},
+      row = #{row,jdbcType=INTEGER},
+      finishedTime = #{finishedtime,jdbcType=TIMESTAMP},
+      submitter = #{submitter,jdbcType=VARCHAR}
+    where submitId = #{submitid,jdbcType=BIGINT}
+  </update>
+</mapper>

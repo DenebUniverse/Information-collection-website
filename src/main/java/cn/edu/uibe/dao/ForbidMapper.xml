@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.uibe.dao.ForbidMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.uibe.domain.Forbid">
+    <id column="forbidId" jdbcType="BIGINT" property="forbidid" />
+    <result column="collectId" jdbcType="BIGINT" property="collectid" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="col" jdbcType="INTEGER" property="col" />
+    <result column="row" jdbcType="INTEGER" property="row" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    forbidId, collectId, details, col, row
+  </sql>
+  <!--     List<Forbid> selectBycollectId(Long collectId);	 -->
+    <select id="selectBycollectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from forbid
+    where collectId = #{collectId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from forbid
+    where forbidId = #{forbidid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from forbid
+    where forbidId = #{forbidid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.uibe.domain.Forbid">
+    insert into forbid (forbidId, collectId, details, 
+      col, row)
+    values (#{forbidid,jdbcType=BIGINT}, #{collectid,jdbcType=BIGINT}, #{details,jdbcType=VARCHAR}, 
+      #{col,jdbcType=INTEGER}, #{row,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.uibe.domain.Forbid">
+    insert into forbid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="forbidid != null">
+        forbidId,
+      </if>
+      <if test="collectid != null">
+        collectId,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="col != null">
+        col,
+      </if>
+      <if test="row != null">
+        row,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="forbidid != null">
+        #{forbidid,jdbcType=BIGINT},
+      </if>
+      <if test="collectid != null">
+        #{collectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="col != null">
+        #{col,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        #{row,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.uibe.domain.Forbid">
+    update forbid
+    <set>
+      <if test="collectid != null">
+        collectId = #{collectid,jdbcType=BIGINT},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="col != null">
+        col = #{col,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        row = #{row,jdbcType=INTEGER},
+      </if>
+    </set>
+    where forbidId = #{forbidid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.uibe.domain.Forbid">
+    update forbid
+    set collectId = #{collectid,jdbcType=BIGINT},
+      details = #{details,jdbcType=VARCHAR},
+      col = #{col,jdbcType=INTEGER},
+      row = #{row,jdbcType=INTEGER}
+    where forbidId = #{forbidid,jdbcType=BIGINT}
+  </update>
+</mapper>
